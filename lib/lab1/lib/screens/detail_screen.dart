@@ -109,7 +109,7 @@ class _DetailScreenState extends State<DetailScreen> {
     final registered = _name.isNotEmpty && _event.contains(_name);
     final VoidCallback? action = registered
         ? _leave
-        : _event.isFull
+        : _event.isFull || _event.isPast
         ? null
         : _register;
     return DefaultTabController(
@@ -160,6 +160,8 @@ class _DetailScreenState extends State<DetailScreen> {
               child: Text(
                 registered
                     ? 'Cancel registration'
+                    : _event.isPast
+                    ? 'Ended'
                     : _event.isFull
                     ? 'Full'
                     : 'Register',

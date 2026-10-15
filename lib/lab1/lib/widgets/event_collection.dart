@@ -27,7 +27,7 @@ class EventCollection extends StatelessWidget {
       builder: (context, constraints) {
         if (constraints.maxWidth >= 600) {
           return GridView.builder(
-            padding: const EdgeInsets.all(8),
+            padding: const EdgeInsets.fromLTRB(8, 8, 8, 88),
             gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
               maxCrossAxisExtent: 360,
               childAspectRatio: 2.4,

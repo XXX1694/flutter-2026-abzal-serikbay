@@ -140,6 +140,9 @@ class _EventFormScreenState extends State<EventFormScreen> {
     return null;
   }
 
+  String? _validateDescription(String? value) =>
+      (value?.trim().length ?? 0) > 300 ? 'At most 300 characters' : null;
+
   String? _validateDate(String? _) => _date == null ? 'Pick a date' : null;
 
   String? _validateTime(String? _) {
@@ -345,6 +348,7 @@ class _EventFormScreenState extends State<EventFormScreen> {
                 textCapitalization: TextCapitalization.sentences,
                 minLines: 1,
                 maxLines: 4,
+                validator: _validateDescription,
                 onTapOutside: _unfocus,
                 decoration: const InputDecoration(
                   labelText: 'Description (optional)',
