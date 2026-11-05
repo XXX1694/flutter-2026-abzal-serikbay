@@ -25,3 +25,19 @@ Provider.of<Cart>(context, listen: false);
 ```
 
 Silent (`context.read<Cart>().count` in the badge): no error, the badge stays at `0` forever.
+
+## Level 4: Rebuilds of the badge
+
+Three presses on `+` in the cart:
+
+- `context.watch<Cart>().count`: `badge build` ×3
+- `context.select<Cart, int>((c) => c.count)`: `badge build` ×0
+- Remove a book with `select`: `badge build` ×1
+- `context.watch<Cart>()` moved up into `BooksScreen.build`: 18 row rebuilds (6 rows × 3)
+
+## Where does it live?
+
+- Cart: provided. Books screen, badge and Cart screen all need it on different routes.
+- Search text in the Books AppBar: ephemeral. Only the Books screen uses it to filter its list.
+- Total expanded or collapsed: ephemeral. Only the total widget on the Cart screen cares.
+- Theme mode: lifted (or provided) above `MaterialApp`. It is read by `MaterialApp` and changed by a switch deep down.
